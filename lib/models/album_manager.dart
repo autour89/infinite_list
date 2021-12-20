@@ -4,7 +4,6 @@ import 'package:infinite_list/models/services/album_service.dart';
 
 class AlbumProvider extends ChangeNotifier {
   final IAlbumService albumService;
-  bool _isLoadMore = false;
   bool _isLoading = false;
 
   /// is there any data?
@@ -13,9 +12,6 @@ class AlbumProvider extends ChangeNotifier {
   /// first sync is in progress or no?
   bool get isLoading => _isLoading;
 
-  /// is retreiving more photos?
-  bool get isLoadMore => _isLoadMore;
-
   /// read local storage
   List<Photo> get photos => List.unmodifiable(albumService.models);
 
@@ -23,6 +19,8 @@ class AlbumProvider extends ChangeNotifier {
 
   /// load first page remotely
   Future initialLoad() async {
+    if (_isLoading) return;
+
     _isLoading = true;
     notifyListeners();
 
@@ -37,17 +35,15 @@ class AlbumProvider extends ChangeNotifier {
 
   /// load one more page of data
   Future loadMore() async {
-    if (_isLoadMore) return;
+    if (_isLoading) return;
 
-    _isLoadMore = true;
-
-    notifyListeners();
+    _isLoading = true;
 
     try {
       // await Future.delayed(const Duration(milliseconds: 5000));
       await albumService.load();
     } finally {
-      _isLoadMore = false;
+      _isLoading = false;
 
       notifyListeners();
     }
