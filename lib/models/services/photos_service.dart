@@ -6,8 +6,11 @@ part "photos_service.chopper.dart";
 
 @ChopperApi(baseUrl: '/')
 abstract class PhotosService extends ChopperService {
+  @Get(path: 'photos')
+  Future<Response> getAll();
+
   @Get(path: 'photos?_page={page}')
-  Future<Response> getPhotos(@Path() String page);
+  Future<Response> getPhotos(@Path() int page);
 
   static PhotosService create() {
     final client = ChopperClient(

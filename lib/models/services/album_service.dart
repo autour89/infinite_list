@@ -14,11 +14,11 @@ abstract class IAlbumService {
 
 class AlbumService implements IAlbumService {
   final IDataService _dbContextService;
-  final PhotosService _client;
-  int _nextPage = 0; // page that is going to be load next
+  final PhotosService _photosService;
+  int _page = 0; // page that is going to be load next
 
-  AlbumService(this._dbContextService) : _client = PhotosService.create() {
-    _nextPage = models.isNotEmpty ? models.last.page + 1 : 0;
+  AlbumService(this._dbContextService, this._photosService) {
+    _page = models.isNotEmpty ? models.last.page + 1 : 0;
   }
 
   /// list of photos
@@ -34,22 +34,20 @@ class AlbumService implements IAlbumService {
   /// fetch remote data
   @override
   Future load() async {
-    var response = await _client.getPhotos(_nextPage.toString());
+    var response = await _photosService.getPhotos(_page);
 
     // final http.Response response = await fetchPhotos();
     if (response.body is Success) {
       var data = (response.body as Success).value;
       for (var json in data) {
-        _dbContextService
-            .add(Photo.fromDto(PhotoDto.fromJson(json), _nextPage));
+        _dbContextService.add(Photo.fromDto(PhotoDto.fromJson(json), _page));
       }
-      _nextPage++;
+      _page++;
     }
   }
 
   Future<http.Response> fetchPhotos() {
     // simple get request, may be it's better to use chooper
-    return http
-        .get(Uri.parse('${Configuration.photosEndPoint}?_page=$_nextPage'));
+    return http.get(Uri.parse('${Configuration.photosEndPoint}?_page=$_page'));
   }
 }

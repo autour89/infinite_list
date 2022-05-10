@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_list/models/models.dart';
+import 'package:infinite_list/models/services/photos_service.dart';
 import 'package:infinite_list/views/app_theme.dart';
 import 'package:infinite_list/views/screens/album_screen.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
   build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider.value(value: AlbumService(DbContextRepository())),
+        Provider.value(
+            value: AlbumService(DbContextRepository(), PhotosService.create())),
         ChangeNotifierProxyProvider<AlbumService, AlbumProvider>(
           create: (context) => AlbumProvider(
               albumService: Provider.of<AlbumService>(context, listen: false)),

@@ -17,7 +17,14 @@ class _$PhotosService extends PhotosService {
   final definitionType = PhotosService;
 
   @override
-  Future<Response<dynamic>> getPhotos(String page) {
+  Future<Response<dynamic>> getAll() {
+    final $url = '/photos';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> getPhotos(int page) {
     final $url = '/photos?_page=${page}';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
