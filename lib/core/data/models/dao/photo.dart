@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:infinite_list/models/dto/photo_dto.dart';
+import 'package:infinite_list/core/data/models/dto/photo_dto.dart';
 
 part 'photo.g.dart';
 

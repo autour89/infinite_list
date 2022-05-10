@@ -1,6 +1,6 @@
 import 'package:chopper/chopper.dart';
-import 'package:infinite_list/models/services/configuration.dart';
-import 'package:infinite_list/models/services/network/model_converter.dart';
+import 'package:infinite_list/core/configuration.dart';
+import 'package:infinite_list/core/network/model_converter.dart';
 
 part "photos_service.chopper.dart";
 

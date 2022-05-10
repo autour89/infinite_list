@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:infinite_list/models/dao/photo.dart';
-import 'package:infinite_list/models/services/album_service.dart';
+import 'package:infinite_list/core/data/models/dao/photo.dart';
+import 'package:infinite_list/core/services/album_service.dart';
 
 class AlbumProvider extends ChangeNotifier {
   final IAlbumService albumService;

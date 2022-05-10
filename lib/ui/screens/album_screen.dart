@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:infinite_list/models/models.dart';
-import 'package:infinite_list/views/components/infinite_list.dart';
+import 'package:infinite_list/core/models.dart';
+import 'package:infinite_list/ui/components/infinite_list.dart';
 import 'package:provider/provider.dart';
 
 class AlbumScreen extends StatefulWidget {

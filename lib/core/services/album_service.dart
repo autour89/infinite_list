@@ -1,10 +1,10 @@
-import 'package:infinite_list/models/dao/photo.dart';
-import 'package:infinite_list/models/dto/photo_dto.dart';
-import 'package:infinite_list/models/services/configuration.dart';
-import 'package:infinite_list/models/services/network/model_response.dart';
-import 'package:infinite_list/models/services/photos_service.dart';
-import 'package:infinite_list/models/services/repositories/db_context_repository.dart';
+import 'package:infinite_list/core/data/models/dao/photo.dart';
+import 'package:infinite_list/core/data/models/dto/photo_dto.dart';
+import 'package:infinite_list/core/data/repositories/db_context_repository.dart';
+import 'package:infinite_list/core/configuration.dart';
+import 'package:infinite_list/core/network/model_response.dart';
 import 'package:http/http.dart' as http;
+import 'package:infinite_list/core/network/photos_service.dart';
 
 abstract class IAlbumService {
   List<Photo> get models;

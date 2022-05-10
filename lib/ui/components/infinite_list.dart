@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:infinite_list/models/album_manager.dart';
-import 'package:infinite_list/views/components/loading_more.dart';
-import 'package:infinite_list/views/components/photo_cart.dart';
+import 'package:infinite_list/core/album_manager.dart';
+import 'package:infinite_list/ui/components/loading_more.dart';
+import 'package:infinite_list/ui/components/photo_cart.dart';
 
 class InfiniteListView extends StatelessWidget {
   final AlbumProvider provider;

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:chopper/chopper.dart';
-import 'package:infinite_list/models/services/network/model_response.dart';
+import 'package:infinite_list/core/network/model_response.dart';
 
 class ModelConverter implements Converter {
   @override

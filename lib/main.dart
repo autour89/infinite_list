@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:infinite_list/models/models.dart';
-import 'package:infinite_list/models/services/photos_service.dart';
-import 'package:infinite_list/views/app_theme.dart';
-import 'package:infinite_list/views/screens/album_screen.dart';
+import 'package:infinite_list/core/data/repositories/db_context_repository.dart';
+import 'package:infinite_list/core/models.dart';
+import 'package:infinite_list/core/network/photos_service.dart';
+import 'package:infinite_list/core/services/album_service.dart';
+import 'package:infinite_list/ui/app_theme.dart';
+import 'package:infinite_list/ui/screens/album_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
