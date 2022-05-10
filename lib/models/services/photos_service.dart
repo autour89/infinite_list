@@ -1,5 +1,6 @@
 import 'package:chopper/chopper.dart';
 import 'package:infinite_list/models/services/configuration.dart';
+import 'package:infinite_list/models/services/network/model_converter.dart';
 
 part "photos_service.chopper.dart";
 
@@ -12,7 +13,7 @@ abstract class PhotosService extends ChopperService {
     final client = ChopperClient(
       baseUrl: Configuration.baseUrl,
       interceptors: [HttpLoggingInterceptor()],
-      converter: const FormUrlEncodedConverter(), //ModelConverter(),
+      converter: ModelConverter(), //const FormUrlEncodedConverter(),
       errorConverter: const JsonConverter(),
       services: [
         _$PhotosService(),

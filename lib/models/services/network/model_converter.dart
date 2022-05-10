@@ -30,15 +30,15 @@ class ModelConverter implements Converter {
     if (contentType != null && contentType.contains(jsonHeaders)) {
       body = utf8.decode(response.bodyBytes);
     }
+
     try {
-      final mapData = json.decode(body);
-      if (mapData['status'] != null) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return response.copyWith<BodyType>(
-            body: Error(Exception(mapData['status'])) as BodyType);
+            body: Success(json.decode(body)) as BodyType);
+      } else {
+        return response.copyWith<BodyType>(
+            body: Error(Exception(response.error)) as BodyType);
       }
-      const recipeQuery = 'data';
-      return response.copyWith<BodyType>(
-          body: Success(recipeQuery) as BodyType);
     } catch (e) {
       chopperLogger.warning(e);
       return response.copyWith<BodyType>(
