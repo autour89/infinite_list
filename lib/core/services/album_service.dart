@@ -1,6 +1,6 @@
+import 'package:infinite_list/core/data/hive/hive_repository.dart';
 import 'package:infinite_list/core/data/models/dao/photo.dart';
 import 'package:infinite_list/core/data/models/dto/photo_dto.dart';
-import 'package:infinite_list/core/data/repositories/db_context_repository.dart';
 import 'package:infinite_list/core/configuration.dart';
 import 'package:infinite_list/core/network/model_response.dart';
 import 'package:http/http.dart' as http;

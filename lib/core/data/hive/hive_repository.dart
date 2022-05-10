@@ -10,10 +10,10 @@ abstract class IDataService {
   Future delete<T>(int index);
 }
 
-class DbContextRepository implements IDataService {
+class HiveRepository implements IDataService {
   late Box<Photo> _album;
 
-  DbContextRepository() {
+  HiveRepository() {
     configure();
   }
 

@@ -38,6 +38,9 @@ dependencies:
   http: ^0.13.4
   hive: ^2.0.4
   hive_flutter: ^1.1.0
+  drift: ^1.6.0
+  sqflite: ^2.0.2+1
+  sqlbrite: ^2.2.0
   cached_network_image: ^3.2.0
   google_fonts: ^2.1.0
   chopper: ^4.0.5
@@ -54,6 +57,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
   hive_generator: ^1.1.1
+  drift_dev: ^1.6.0
   chopper_generator: ^4.0.5
   build_runner: ^2.1.5
 

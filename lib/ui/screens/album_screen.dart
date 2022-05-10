@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:infinite_list/core/models.dart';
+import 'package:infinite_list/core/album_manager.dart';
+import 'package:infinite_list/core/data/models/models.dart';
 import 'package:infinite_list/ui/components/infinite_list.dart';
 import 'package:provider/provider.dart';
 
