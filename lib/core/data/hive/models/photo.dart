@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:infinite_list/core/data/models/dto/photo_dto.dart';
+import 'package:infinite_list/core/data/models/photo_dto.dart' as dto;
 
 part 'photo.g.dart';
 
@@ -29,7 +29,7 @@ class Photo extends HiveObject {
       this.like = false,
       this.page = 0});
 
-  factory Photo.fromDto(PhotoDto photoDto, int page) {
+  factory Photo.fromDto(dto.Photo photoDto, int page) {
     return Photo(
         albumId: photoDto.albumId,
         id: photoDto.id,

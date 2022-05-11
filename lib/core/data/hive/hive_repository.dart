@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:infinite_list/core/data/models/dao/photo.dart';
 import 'package:infinite_list/core/configuration.dart';
+import 'package:infinite_list/core/data/hive/models/photo.dart';
 
 abstract class IDataService {
   List<Photo> get album;

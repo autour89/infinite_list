@@ -1,7 +1,10 @@
-import 'package:infinite_list/core/data/models/dao/photo.dart';
+import 'package:infinite_list/core/data/hive/models/photo.dart';
 import 'package:infinite_list/core/data/repository.dart';
+import 'package:infinite_list/core/data/sqlite/database_helper.dart';
 
 class SqliteRepository implements Repository {
+  final dbHelper = DatabaseHelper.instance;
+
   @override
   Future<List<Photo>> findAllRecipes() {
     // TODO: implement findAllRecipes
@@ -33,13 +36,13 @@ class SqliteRepository implements Repository {
   }
 
   @override
-  Future init() {
-    // TODO: implement init
-    throw UnimplementedError();
+  Future init() async {
+    await dbHelper.database;
+    return Future.value();
   }
 
   @override
   void close() {
-    // TODO: implement close
+    dbHelper.close();
   }
 }

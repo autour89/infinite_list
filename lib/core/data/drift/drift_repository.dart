@@ -1,4 +1,4 @@
-import 'package:infinite_list/core/data/models/dao/photo.dart';
+import 'package:infinite_list/core/data/hive/models/photo.dart';
 import 'package:infinite_list/core/data/repository.dart';
 
 class DrftRepository implements Repository {

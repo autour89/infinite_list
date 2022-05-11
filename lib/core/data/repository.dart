@@ -1,6 +1,4 @@
-import 'package:infinite_list/core/data/models/dao/photo.dart';
-
-import 'models/models.dart';
+import 'package:infinite_list/core/data/hive/models/photo.dart';
 
 abstract class Repository {
   Future<List<Photo>> findAllRecipes();

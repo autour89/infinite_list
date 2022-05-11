@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:infinite_list/core/data/models/dao/photo.dart';
+import 'package:infinite_list/core/data/hive/models/photo.dart';
 import 'package:infinite_list/core/services/album_service.dart';
 
 class AlbumProvider extends ChangeNotifier {

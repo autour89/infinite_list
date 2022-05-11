@@ -1,7 +1,12 @@
-import 'package:infinite_list/core/data/models/dao/photo.dart';
+import 'dart:async';
+
+import 'package:infinite_list/core/data/hive/models/photo.dart';
 import 'package:infinite_list/core/data/repository.dart';
 
 class MemoryRepository extends Repository {
+  final StreamController _albumStreamController =
+      StreamController<List<String>>();
+
   @override
   Future<List<Photo>> findAllRecipes() {
     // TODO: implement findAllRecipes
@@ -34,12 +39,11 @@ class MemoryRepository extends Repository {
 
   @override
   Future init() {
-    // TODO: implement init
-    throw UnimplementedError();
+    return Future.value();
   }
 
   @override
   void close() {
-    // TODO: implement close
+    _albumStreamController.close();
   }
 }
