@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:infinite_list/core/data/models/photo_dto.dart' as dto;
+import 'package:infinite_list/core/data/models/photo_dao.dart' as dao;
 
 part 'photo.g.dart';
 
@@ -38,4 +39,25 @@ class Photo extends HiveObject {
         thumbnailUrl: photoDto.thumbnailUrl,
         page: page);
   }
+
+  factory Photo.fromDao(dao.Photo photoDao) {
+    return Photo(
+        albumId: photoDao.albumId,
+        id: photoDao.id,
+        title: photoDao.title,
+        url: photoDao.url,
+        thumbnailUrl: photoDao.thumbnailUrl,
+        page: photoDao.page,
+        like: photoDao.like);
+  }
+
+  Map<String, dynamic> toJson() => {
+        'albumId': albumId,
+        'id': id,
+        'title': title,
+        'url': url,
+        'thumbnailUrl': thumbnailUrl,
+        'page': page,
+        'like': like
+      };
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_list/core/album_manager.dart';
-import 'package:infinite_list/core/data/hive/models/photo.dart';
 import 'package:infinite_list/core/data/models/models.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:infinite_list/ui/screens/details_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:infinite_list/core/data/models/photo_dao.dart';
 
 class PhotoCart extends StatelessWidget {
   final double previewSize = 100;

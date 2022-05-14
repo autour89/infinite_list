@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:infinite_list/core/data/hive/models/photo.dart';
+import 'package:infinite_list/core/data/models/photo_dao.dart';
 import 'package:infinite_list/core/services/album_service.dart';
 
 class AlbumProvider extends ChangeNotifier {
@@ -7,13 +7,13 @@ class AlbumProvider extends ChangeNotifier {
   bool _isLoading = false;
 
   /// is there any data?
-  bool get hasPhotos => albumService.models.isNotEmpty;
+  Future<bool> get hasPhotos async => (await albumService.models).isNotEmpty;
 
   /// first sync is in progress or no?
   bool get isLoading => _isLoading;
 
   /// read local storage
-  List<Photo> get photos => List.unmodifiable(albumService.models);
+  Future<List<Photo>> get photos => albumService.models;
 
   AlbumProvider({required this.albumService});
 

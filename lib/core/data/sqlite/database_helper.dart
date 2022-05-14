@@ -1,3 +1,4 @@
+import 'package:infinite_list/core/data/models/photo_dao.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqlbrite/sqlbrite.dart';
@@ -16,7 +17,6 @@ class DatabaseHelper {
   static var lock = Lock();
 
   static const photoTable = 'Photo';
-  static const photoId = 'photoId';
 
   // only have a single app-wide reference to the database
   static Database? _database;
@@ -25,13 +25,13 @@ class DatabaseHelper {
   Future _onCreate(Database db, int version) async {
     await db.execute('''
         CREATE TABLE $photoTable (
-          $photoId INTEGER PRIMARY KEY,
-          label TEXT,
-          image TEXT,
+          id INTEGER PRIMARY KEY,
+          albumId INTEGER,
+          title TEXT,
           url TEXT,
-          calories REAL,
-          totalWeight REAL,
-          totalTime REAL
+          thumbnailUrl TEXT,
+          page INTEGER,
+          like INTEGER
         )
         ''');
   }
@@ -64,17 +64,40 @@ class DatabaseHelper {
     return _streamDatabase;
   }
 
+  Future<List<Photo>> findAllPhotos() async {
+    final db = await instance.streamDatabase;
+    final album = await db.query(photoTable);
+    return _parseAlbum(album);
+  }
+
+  Stream<List<Photo>> watchAlbum() async* {
+    final db = await instance.streamDatabase;
+    yield* db.createQuery(photoTable).mapToList((row) => Photo.fromJson(row));
+  }
+
   Future<int> insert(String table, Map<String, dynamic> row) async {
     final db = await instance.streamDatabase;
     return db.insert(table, row);
   }
 
-  Future<int> _delete(String table, String columnId, int id) async {
+  Future<int> update(
+      String table, String columnId, int id, Map<String, dynamic> row) async {
+    final db = await instance.streamDatabase;
+    return db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
+  }
+
+  Future<int> delete(String table, String columnId, int id) async {
     final db = await instance.streamDatabase;
     return db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
 
   void close() {
     _streamDatabase.close();
+  }
+
+  List<Photo> _parseAlbum(List<Map<String, dynamic>> album) {
+    final photos = <Photo>[];
+    album.forEach((photoMap) => photos.add(Photo.fromJson(photoMap)));
+    return photos;
   }
 }

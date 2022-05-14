@@ -3,11 +3,15 @@ import 'package:infinite_list/core/album_manager.dart';
 import 'package:infinite_list/ui/components/loading_more.dart';
 import 'package:infinite_list/ui/components/photo_cart.dart';
 
+import '../../core/data/models/photo_dao.dart';
+
 class InfiniteListView extends StatelessWidget {
   final AlbumProvider provider;
   final ScrollController _scrollController = ScrollController();
+  final List<Photo> photos;
 
-  InfiniteListView({Key? key, required this.provider}) : super(key: key) {
+  InfiniteListView({Key? key, required this.provider, required this.photos})
+      : super(key: key) {
     _scrollController.addListener(onScrolled);
   }
 
@@ -16,7 +20,7 @@ class InfiniteListView extends StatelessWidget {
     return Expanded(
         child: ListView.builder(
       controller: _scrollController,
-      itemCount: provider.photos.length + 1,
+      itemCount: photos.length + 1,
       itemBuilder: (context, index) => buildCart(index),
       // To make listView scrollable even if there is only a single item.
       physics: const AlwaysScrollableScrollPhysics(),
@@ -24,10 +28,10 @@ class InfiniteListView extends StatelessWidget {
   }
 
   buildCart(index) {
-    return index >= provider.photos.length
+    return index >= photos.length
         ? const LoadingMore()
         : PhotoCart(
-            photo: provider.photos[index],
+            photo: photos[index],
             id: index,
           );
   }

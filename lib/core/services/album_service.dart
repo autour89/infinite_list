@@ -1,33 +1,38 @@
-import 'package:infinite_list/core/data/hive/hive_repository.dart';
-import 'package:infinite_list/core/data/hive/models/photo.dart';
+import 'package:http/http.dart' as http;
+import 'package:infinite_list/core/data/repository.dart';
+import 'package:infinite_list/core/data/models/photo_dao.dart' as dao;
 import 'package:infinite_list/core/data/models/photo_dto.dart' as dto;
 import 'package:infinite_list/core/configuration.dart';
 import 'package:infinite_list/core/network/model_response.dart';
-import 'package:http/http.dart' as http;
 import 'package:infinite_list/core/network/photos_service.dart';
 
 abstract class IAlbumService {
-  List<Photo> get models;
-  Future<void> update(Photo photo, int index);
+  Future<List<dao.Photo>> get models;
+  Future<void> update(dao.Photo photo, int index);
   Future load();
 }
 
 class AlbumService implements IAlbumService {
-  final IDataService _dbContextService;
+  final Repository _dbContextService;
   final PhotosService _photosService;
   int _page = 0; // page that is going to be load next
 
   AlbumService(this._dbContextService, this._photosService) {
-    _page = models.isNotEmpty ? models.last.page + 1 : 0;
+    initialise();
+  }
+
+  Future initialise() async {
+    var album = await models;
+    _page = album.isNotEmpty ? album.last.page + 1 : 0;
   }
 
   /// list of photos
   @override
-  List<Photo> get models => _dbContextService.album;
+  Future<List<dao.Photo>> get models => _dbContextService.album;
 
   /// update local album storage
   @override
-  Future<void> update(Photo photo, int index) async {
+  Future<void> update(dao.Photo photo, int index) async {
     _dbContextService.update(photo, index);
   }
 
@@ -40,7 +45,8 @@ class AlbumService implements IAlbumService {
     if (response.body is Success) {
       var data = (response.body as Success).value;
       for (var json in data) {
-        _dbContextService.add(Photo.fromDto(dto.Photo.fromJson(json), _page));
+        _dbContextService
+            .add(dao.Photo.fromDto(dto.Photo.fromJson(json), _page));
       }
       _page++;
     }

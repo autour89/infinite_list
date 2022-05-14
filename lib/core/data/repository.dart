@@ -1,8 +1,8 @@
-import 'package:infinite_list/core/data/hive/models/photo.dart';
+import 'package:infinite_list/core/data/models/photo_dao.dart';
 
 abstract class Repository {
-  Future<List<Photo>> findAllRecipes();
-  Stream<List<Photo>> watchAllRecipes();
+  Future<List<Photo>> get album;
+  Stream<List<Photo>> watchAlbum();
   Future add<T>(T entity);
   Future update<T>(T entity, int index);
   Future delete<T>(int index);

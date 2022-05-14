@@ -1,20 +1,17 @@
 import 'dart:async';
 
-import 'package:infinite_list/core/data/hive/models/photo.dart';
+import 'package:infinite_list/core/data/models/photo_dao.dart';
 import 'package:infinite_list/core/data/repository.dart';
 
 class MemoryRepository extends Repository {
   final StreamController _albumStreamController =
-      StreamController<List<String>>();
+      StreamController<List<Photo>>();
 
   @override
-  Future<List<Photo>> findAllRecipes() {
-    // TODO: implement findAllRecipes
-    throw UnimplementedError();
-  }
+  Future<List<Photo>> get album => throw UnimplementedError();
 
   @override
-  Stream<List<Photo>> watchAllRecipes() {
+  Stream<List<Photo>> watchAlbum() {
     // TODO: implement watchAllRecipes
     throw UnimplementedError();
   }
@@ -26,14 +23,14 @@ class MemoryRepository extends Repository {
   }
 
   @override
-  Future delete<T>(int index) {
-    // TODO: implement delete
+  Future update<T>(T entity, int index) {
+    // TODO: implement update
     throw UnimplementedError();
   }
 
   @override
-  Future update<T>(T entity, int index) {
-    // TODO: implement update
+  Future delete<T>(int index) {
+    // TODO: implement delete
     throw UnimplementedError();
   }
 

@@ -1,4 +1,4 @@
-import 'package:infinite_list/core/data/hive/models/photo.dart';
+import 'package:infinite_list/core/data/models/photo_dao.dart';
 import 'package:infinite_list/core/data/repository.dart';
 import 'package:infinite_list/core/data/sqlite/database_helper.dart';
 
@@ -6,33 +6,35 @@ class SqliteRepository implements Repository {
   final dbHelper = DatabaseHelper.instance;
 
   @override
-  Future<List<Photo>> findAllRecipes() {
-    // TODO: implement findAllRecipes
-    throw UnimplementedError();
+  Future<List<Photo>> get album => dbHelper.findAllPhotos();
+
+  @override
+  Stream<List<Photo>> watchAlbum() => dbHelper.watchAlbum();
+
+  @override
+  Future add<T>(T entity) async {
+    if (entity is Photo) {
+      await dbHelper.insert(DatabaseHelper.photoTable, entity.toJson());
+    }
+    return Future.value();
   }
 
   @override
-  Stream<List<Photo>> watchAllRecipes() {
-    // TODO: implement watchAllRecipes
-    throw UnimplementedError();
+  Future update<T>(T entity, int index) async {
+    if (entity is Photo) {
+      await dbHelper.update(
+          DatabaseHelper.photoTable, 'id', index, entity.toJson());
+    }
+    return Future.value();
   }
 
   @override
-  Future add<T>(T entity) {
-    // TODO: implement add
-    throw UnimplementedError();
-  }
+  Future delete<T>(int index) async {
+    if (T is Photo) {
+      await dbHelper.delete(DatabaseHelper.photoTable, 'id', index);
+    }
 
-  @override
-  Future delete<T>(int index) {
-    // TODO: implement delete
-    throw UnimplementedError();
-  }
-
-  @override
-  Future update<T>(T entity, int index) {
-    // TODO: implement update
-    throw UnimplementedError();
+    return Future.value();
   }
 
   @override
